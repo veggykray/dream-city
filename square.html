@@ -1,1 +1,97 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>City of Dreams — Market Square</title>
+<style>
+  body {
+    margin:0; font-family: Georgia, "Times New Roman", serif;
+    background: radial-gradient(circle at top, #1a1a22, #0e0e11);
+    color: #e7e0d1;
+  }
+  .page {
+    min-height: 100vh;
+    display: flex; justify-content: center; align-items: center;
+    padding: 2rem;
+  }
+  .card {
+    max-width: 720px;
+    padding: 24px;
+    border: 1px solid #3a3a48;
+    border-radius: 10px;
+    background: rgba(20,20,28,0.9);
+    text-align: center;
+    box-shadow: 0 10px 40px rgba(0,0,0,.5);
+  }
+  h1 { margin-top: 0; }
+  .creature {
+    font-size: 4rem;
+    line-height: 1;
+    transform: rotate(-5deg);
+    display: inline-block;
+    margin-bottom: 10px;
+  }
+  .muted { color: #cfc6b4; font-size: 0.95rem; }
+  input[type="text"] {
+    width: 100%;
+    padding: .6rem;
+    border-radius: 6px;
+    border: 1px solid #4b4b58;
+    background: #14141c;
+    color: #e7e0d1;
+    margin-top: 12px;
+    font-size: 1rem;
+  }
+  button {
+    margin-top: 12px;
+    padding: .6rem 1rem;
+    background: #2b2b35;
+    color: #e7e0d1;
+    border: 1px solid #4b4b58;
+    border-radius: 8px;
+    cursor: pointer;
+  }
+  button:hover { background: #34343f; }
+  .msg { margin-top: 1rem; min-height: 1.2rem; }
+  .success { color: #ffe1a8; }
+  .fail { color: #ffb2b2; }
+  a.button {
+    display:inline-block; margin-top:1rem; padding:.6rem 1rem;
+    background:#2b2b35; color:#e7e0d1; border:1px solid #4b4b58;
+    border-radius:8px; text-decoration:none;
+  }
+  a.button:hover { background:#34343f; }
+</style>
+</head>
+<body>
+  <div class="page">
+    <div class="card">
+      <div class="creature">🦤</div>
+      <h1>The Dream Bridge</h1>
+      <p class="muted">
+        A strange bird in a battered top hat leans across the stall:<br>
+        “I connect two worlds but have no boards,<br>
+        Many cross me while asleep.<br>
+        What am I?”
+      </p>
+      <input type="text" id="answer" placeholder="Your answer..." />
+      <button onclick="checkAnswer()">Submit</button>
+      <div id="message" class="msg"></div>
+    </div>
+  </div>
+
+  <script>
+    function checkAnswer(){
+      const val = document.getElementById('answer').value.trim().toLowerCase();
+      const msg = document.getElementById('message');
+      if(val === 'dream'){
+        msg.innerHTML = '<span class="success">The bird grins: "Correct! You may pass."</span><br><a class="button" href="index.html">Return to Gates</a>';
+      } else {
+        msg.innerHTML = '<span class="fail">The bird tilts its head: "Nope. Try again."</span>';
+      }
+    }
+  </script>
+</body>
+</html>
 
