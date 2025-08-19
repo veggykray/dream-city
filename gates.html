@@ -5,32 +5,53 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>City of Dreams — The Gates</title>
 <style>
-  body {
-    margin:0; background:#0e0e11; color:#e7e0d1;
-    font-family: monospace; /* undertale vibe */
-    display:flex; flex-direction:column; align-items:center; justify-content:center;
-    min-height:100vh;
+  *{box-sizing:border-box}
+  body{
+    margin:0; background:#000; color:#fff;
+    font-family: monospace; text-align:center;
+    min-height:100vh; display:flex; flex-direction:column; justify-content:center; align-items:center;
   }
-  h1 {
-    font-size:2rem; margin:1rem 0; letter-spacing:2px;
+  h1{margin:0 0 12px}
+  .scene{
+    display:flex; gap:24px; align-items:flex-end; justify-content:center;
+    padding:16px; border:2px solid #666; border-radius:8px; width:min(90vw,760px);
+    background:#000;
   }
-  .gates {
-    display:flex; gap:20px;
-    margin: 20px 0;
+  .pillar{
+    width:48px; height:220px; background:#111;
+    border:2px solid #aaa; box-shadow: inset 0 0 0 2px #555;
   }
-  .pillar {
-    width:40px; height:200px;
-    background: repeating-linear-gradient(
-      to bottom,
-      #444 0 10px,
-      #333 10px 20px
-    );
-    border:2px solid #666;
-    box-shadow: inset 0 0 4px #000;
+  .arch{
+    position:relative; width:220px; height:220px; background:#111;
+    border:2px solid #aaa; border-top-left-radius:110px; border-top-right-radius:110px;
+    box-shadow: inset 0 0 0 2px #555;
   }
-  .arch {
-    width:160px; height:200px; position:relative;
-    background: linear-gradient(to bottom,#444,#222);
-    border:2px solid #666;
-    border-top-left-radius:80px;
-    border-top-right-radius:80px;
+  .arch::before{
+    content:""; position:absolute; left:18px; right:18px; top:18px; bottom:18px;
+    border:2px dashed #888; border-top-left-radius:92px; border-top-right-radius:92px;
+  }
+  .lantern{
+    position:absolute; top:-56px; left:50%; transform:translateX(-50%);
+    width:26px; height:34px; background:#111; border:2px solid #ffd27a; border-radius:4px;
+    box-shadow: 0 0 18px rgba(255,210,122,.9), 0 0 4px rgba(255,210,122,1) inset;
+  }
+  .lantern::after{
+    content:""; position:absolute; inset:5px; border-radius:50%;
+    background: radial-gradient(circle at 50% 50%, #ffe7b3 0%, #ffcf77 55%, rgba(255,207,119,0) 70%);
+  }
+  .hint{color:#bbb; margin-top:10px}
+  a.button{
+    display:inline-block; margin-top:18px; padding:10px 14px;
+    border:2px solid #aaa; border-radius:6px; color:#fff; text-decoration:none;
+  }
+  a.button:hover{background:#111}
+</style>
+</head>
+<body>
+  <h1>THE GATES</h1>
+  <div class="scene">
+    <div class="pillar" aria-hidden="true"></div>
+    <div class="arch" aria-label="Stone archway"><div class="lantern" aria-hidden="true"></div></div>
+    <div class="pillar" aria-hidden="true"></div>
+  </div>
+  <p class="hint">Mist curls through the arch.
