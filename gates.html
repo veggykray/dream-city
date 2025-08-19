@@ -1,57 +1,66 @@
 <!doctype html>
 <html lang="en">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
 <title>City of Dreams — The Gates</title>
 <style>
+  /* ---------- base ---------- */
+  :root{
+    --ink:#fff; --bg:#000; --line:#bdbdbd; --dim:#888;
+    --glow:#ffe19a; --heart:#ff3b3b;
+  }
   *{box-sizing:border-box}
+  html,body{height:100%}
   body{
-    margin:0; background:#000; color:#fff;
-    font-family: monospace; text-align:center;
-    min-height:100vh; display:flex; flex-direction:column; justify-content:center; align-items:center;
+    margin:0; background:var(--bg); color:var(--ink);
+    font-family: ui-monospace, "Cascadia Mono", Menlo, Consolas, Monaco, "Courier New", monospace;
+    display:flex; flex-direction:column; align-items:center; justify-content:center;
+    overflow:hidden;
   }
-  h1{margin:0 0 12px}
-  .scene{
-    display:flex; gap:24px; align-items:flex-end; justify-content:center;
-    padding:16px; border:2px solid #666; border-radius:8px; width:min(90vw,760px);
-    background:#000;
+
+  /* ---------- title ---------- */
+  .title{
+    position:relative; display:flex; align-items:center; gap:.4rem;
+    font-weight:700; letter-spacing:2px; margin-bottom:6px; font-size:28px;
   }
-  .pillar{
-    width:48px; height:220px; background:#111;
-    border:2px solid #aaa; box-shadow: inset 0 0 0 2px #555;
+  .lantern-cap{
+    position:relative; width:30px; height:38px; border:2px solid #e1c27a;
+    border-radius:6px; background:#1e1b13; display:inline-block;
+    box-shadow: 0 0 22px rgba(255,225,154,.85), 0 0 6px rgba(255,225,154,.95) inset;
+    animation: flicker .9s infinite steps(2,end);
   }
-  .arch{
-    position:relative; width:220px; height:220px; background:#111;
-    border:2px solid #aaa; border-top-left-radius:110px; border-top-right-radius:110px;
-    box-shadow: inset 0 0 0 2px #555;
+  .lantern-cap::after{
+    content:""; position:absolute; inset:5px; border-radius:4px;
+    background: radial-gradient(circle at 50% 50%, var(--glow) 0%, #ffcc72 55%, rgba(255,204,114,0) 72%);
+    filter: blur(.2px);
   }
-  .arch::before{
-    content:""; position:absolute; left:18px; right:18px; top:18px; bottom:18px;
-    border:2px dashed #888; border-top-left-radius:92px; border-top-right-radius:92px;
+  @keyframes flicker{
+    0%,100%{ box-shadow: 0 0 22px rgba(255,225,154,.8), 0 0 6px rgba(255,225,154,.95) inset; transform: translateY(0); }
+    50%{ box-shadow: 0 0 16px rgba(255,225,154,.55), 0 0 4px rgba(255,225,154,.8) inset; transform: translateY(1px); }
   }
-  .lantern{
-    position:absolute; top:-56px; left:50%; transform:translateX(-50%);
-    width:26px; height:34px; background:#111; border:2px solid #ffd27a; border-radius:4px;
-    box-shadow: 0 0 18px rgba(255,210,122,.9), 0 0 4px rgba(255,210,122,1) inset;
+  .rule{ width:min(90vw,940px); height:1px; background:#666; opacity:.7; }
+
+  /* ---------- scene frame ---------- */
+  .frame{
+    position:relative; margin-top:14px;
+    width:min(92vw,980px); height:min(44vw,420px);
+    border:2px solid var(--line); border-radius:12px;
+    display:flex; align-items:flex-end; justify-content:center; padding:22px;
   }
-  .lantern::after{
-    content:""; position:absolute; inset:5px; border-radius:50%;
-    background: radial-gradient(circle at 50% 50%, #ffe7b3 0%, #ffcf77 55%, rgba(255,207,119,0) 70%);
+
+  /* fog layers */
+  .fog, .fog::before, .fog::after{
+    position:absolute; inset:0; pointer-events:none;
   }
-  .hint{color:#bbb; margin-top:10px}
-  a.button{
-    display:inline-block; margin-top:18px; padding:10px 14px;
-    border:2px solid #aaa; border-radius:6px; color:#fff; text-decoration:none;
+  .fog{ filter: blur(6px); opacity:.22; }
+  .fog::before{
+    content:""; background:
+      radial-gradient(600px 180px at -10% 30%, rgba(255,255,255,.15), transparent 60%),
+      radial-gradient(500px 220px at 110% 70%, rgba(255,255,255,.14), transparent 65%);
+    animation: drift1 32s linear infinite;
   }
-  a.button:hover{background:#111}
-</style>
-</head>
-<body>
-  <h1>THE GATES</h1>
-  <div class="scene">
-    <div class="pillar" aria-hidden="true"></div>
-    <div class="arch" aria-label="Stone archway"><div class="lantern" aria-hidden="true"></div></div>
-    <div class="pillar" aria-hidden="true"></div>
-  </div>
-  <p class="hint">Mist curls through the arch.
+  .fog::after{
+    content:""; background:
+      radial-gradient(380px 140px at 30% -10%, rgba(255,255,255,.18), transparent 60%),
+      ra
