@@ -1,89 +1,36 @@
-import pygame
-import sys
-
-# Initialize Pygame
-pygame.init()
-
-# Screen setup
-WIDTH, HEIGHT = 800, 600
-screen = pygame.display.set_mode((WIDTH, HEIGHT))
-pygame.display.set_caption("Dream City")
-
-# Colors
-BLACK = (0, 0, 0)
-WHITE = (255, 255, 255)
-GRAY = (100, 100, 100)
-DARK_GRAY = (50, 50, 50)
-PURPLE = (120, 60, 150)
-BLUE = (40, 80, 180)
-
-# Font
-font = pygame.font.Font(pygame.font.get_default_font(), 64)
-small_font = pygame.font.Font(pygame.font.get_default_font(), 32)
-
-# Button setup
-button_text = small_font.render("ENTER", True, WHITE)
-button_rect = pygame.Rect(WIDTH//2 - 100, HEIGHT//2 + 100, 200, 60)
-
-def draw_gothic_gates():
-    # Gothic style gates (simple pixel art style)
-    pygame.draw.rect(screen, DARK_GRAY, (150, 200, 50, 300))  # Left pillar
-    pygame.draw.rect(screen, DARK_GRAY, (600, 200, 50, 300))  # Right pillar
-    pygame.draw.arc(screen, GRAY, (200, 100, 400, 400), 3.14, 0, 5)  # Arch
-    pygame.draw.line(screen, GRAY, (200, 300), (600, 300), 3)
-    pygame.draw.line(screen, GRAY, (200, 400), (600, 400), 3)
-
-def start_screen():
-    running = True
-    while running:
-        screen.fill(BLACK)
-
-        # Title
-        title = font.render("Dream City", True, PURPLE)
-        screen.blit(title, (WIDTH//2 - title.get_width()//2, 80))
-
-        # Draw gothic gates
-        draw_gothic_gates()
-
-        # Button hover effect
-        mouse_pos = pygame.mouse.get_pos()
-        if button_rect.collidepoint(mouse_pos):
-            pygame.draw.rect(screen, GRAY, button_rect, border_radius=12)
-        else:
-            pygame.draw.rect(screen, DARK_GRAY, button_rect, border_radius=12)
-        screen.blit(button_text, (button_rect.centerx - button_text.get_width()//2,
-                                  button_rect.centery - button_text.get_height()//2))
-
-        for event in pygame.event.get():
-            if event.type == pygame.QUIT:
-                pygame.quit()
-                sys.exit()
-            if event.type == pygame.MOUSEBUTTONDOWN:
-                if button_rect.collidepoint(event.pos):
-                    return "city"
-
-        pygame.display.flip()
-
-def city_screen():
-    running = True
-    while running:
-        screen.fill(BLUE)
-
-        # Simple city placeholder
-        title = font.render("Welcome to the City", True, WHITE)
-        screen.blit(title, (WIDTH//2 - title.get_width()//2, HEIGHT//2 - 32))
-
-        for event in pygame.event.get():
-            if event.type == pygame.QUIT:
-                pygame.quit()
-                sys.exit()
-
-        pygame.display.flip()
-
-# Game state management
-current_screen = "start"
-while True:
-    if current_screen == "start":
-        current_screen = start_screen()
-    elif current_screen == "city":
-        city_screen()
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>City of Dreams — The Gates</title>
+<style>
+  body {
+    margin:0; background:#0e0e11; color:#e7e0d1;
+    font-family: monospace; /* undertale vibe */
+    display:flex; flex-direction:column; align-items:center; justify-content:center;
+    min-height:100vh;
+  }
+  h1 {
+    font-size:2rem; margin:1rem 0; letter-spacing:2px;
+  }
+  .gates {
+    display:flex; gap:20px;
+    margin: 20px 0;
+  }
+  .pillar {
+    width:40px; height:200px;
+    background: repeating-linear-gradient(
+      to bottom,
+      #444 0 10px,
+      #333 10px 20px
+    );
+    border:2px solid #666;
+    box-shadow: inset 0 0 4px #000;
+  }
+  .arch {
+    width:160px; height:200px; position:relative;
+    background: linear-gradient(to bottom,#444,#222);
+    border:2px solid #666;
+    border-top-left-radius:80px;
+    border-top-right-radius:80px;
